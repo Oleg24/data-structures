@@ -36,25 +36,17 @@ var makeLinkedList = function(){
   list.contains = function(target){
     var hasValue = false;
     var thisNode = arguments[1] || list.head;
-    console.log("line 39"+ thisNode);
     if(!hasValue){
-      debugger;
         if(thisNode.value === target){
-          console.log("this node === target")
           hasValue = true;
-          console.log(hasValue)
-          console.log("^^^this should say true")
           return hasValue;
-          console.log("supposed to be true "+hasValue);
         } else {
           var nextNode = thisNode.next;
-          // console.log("nextNode" + nextNode);
-              console.log("supposed to be false "+hasValue)
             if(nextNode === null){
               return hasValue;
           }
           var newTarget = target;
-          list.contains(newTarget, nextNode)
+          return list.contains(newTarget, nextNode)
         }
     };
   }
