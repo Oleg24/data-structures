@@ -1,7 +1,8 @@
-var makeTree = function(value){
+var makeTree = function(value) {
   var newTree = {};
   newTree.value = value;
-  newTree.children = undefined;
+  newTree.children = [];
+  _.extend(newTree, treeMethods);
   return newTree;
 };
 
@@ -10,15 +11,25 @@ var makeTree = function(value){
 
 var treeMethods = {};
 
-treeMethods.addChild = function(value){
+treeMethods.addChild = function(value) {
+  var newChild = makeTree(value);
+  this.children = this.children || [];
+  // if(!Array.isArray(this.children)){
+  //   this.children = [];
+  // }
+  this.children.push(newChild);
 
 };
 
-treeMethods.contains = function(target){
-
-};
-
-
-/*
- * Complexity: What is the time complexity of the above functions?
- */
+treeMethods.contains = function(target) {
+  var currentVal = this;
+    if (currentVal.value === target) {
+      return true;
+    }
+    for(var i=0; i<currentVal.children.length; i++){
+      if(currentVal.children[i].contains(target)){
+        return true;
+      }
+    }
+  return false;
+}
